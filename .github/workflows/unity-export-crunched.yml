@@ -16,7 +16,7 @@ jobs:
       - name: Set up Unity license
         run: |
           mkdir -p ~/.local/share/unity3d
-          echo "${{ secrets.UNITY_LICENSE }}" > ~/.local/share/unity3d/Unity_v2022.x.ulf
+          echo "${{ secrets.UNITY_LICENSE }}" > ~/.local/share/unity3d/Unity_lic.ulf
 
       - name: Export Crunched Textures
         run: |
