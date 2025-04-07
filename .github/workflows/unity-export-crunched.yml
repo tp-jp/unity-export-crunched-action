@@ -6,8 +6,6 @@ on:
 jobs:
   export:
     runs-on: ubuntu-latest
-    container:
-      image: unityci/editor:ubuntu-2022.3.22f1-base-3.1.0
 
     steps:
       - name: Checkout repo
