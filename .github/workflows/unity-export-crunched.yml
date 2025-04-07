@@ -13,10 +13,15 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Set up Unity license
+      - name: Activate Unity License
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         run: |
-          mkdir -p ~/.local/share/unity3d
-          echo "${{ secrets.UNITY_LICENSE }}" > ~/.local/share/unity3d/Unity_v2019.x.ulf
+          echo $UNITY_LICENSE | tr -d '\r' > unity_license_file.ulf
+          xvfb-run --auto-servernum --server-args='-screen 0 640x480x24' \
+          unity-editor \
+            -batchmode \
+            -manualLicenseFile unity_license_file.ulf
 
       - name: Export Crunched Textures
         run: |
