@@ -19,7 +19,7 @@ jobs:
           echo "${{ secrets.UNITY_LICENSE }}" > ~/.local/share/unity3d/Unity_v2019.x.ulf
 
       - name: Set up Unity
-        uses: unity-actions/setup@v4
+        uses: unity-actions/setup@v3
         with:
           unityVersion: 2022.3.22f1
 
