@@ -21,7 +21,7 @@ jobs:
       - name: Set up Unity
         uses: unity-actions/setup@v2
         with:
-          unityVersion: 2022.3.22f1
+          unityVersion: '2022.3.22f1'
 
       - name: Export Crunched Textures
         run: |
