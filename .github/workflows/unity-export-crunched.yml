@@ -13,11 +13,17 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      - name: Set up Unity license
+        run: |
+          mkdir -p ~/.local/share/unity3d
+          echo "${{ secrets.UNITY_LICENSE }}" > ~/.local/share/unity3d/Unity_v2019.x.ulf
+
+      - name: Set up Unity
+        uses: unity-actions/setup@v4
+        with:
+          unityVersion: 2022.3.22f1
+
       - name: Export Crunched Textures
-        env:
-          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         run: |
           xvfb-run --auto-servernum --server-args='-screen 0 640x480x24' \
           unity-editor \
