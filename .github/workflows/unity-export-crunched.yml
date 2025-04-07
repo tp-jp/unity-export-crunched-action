@@ -1,0 +1,29 @@
+name: Export Crunched Textures
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: unityci/editor:ubuntu-2022.3.22f1-base-3.1.0
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Export Crunched Textures
+        run: |
+          xvfb-run --auto-servernum --server-args='-screen 0 640x480x24' \
+          unity-editor \
+            -batchmode \
+            -projectPath . \
+            -executeMethod ExportCrunchedBytes.Export \
+            -quit
+
+      - name: Upload exported bytes
+        uses: actions/upload-artifact@v3
+        with:
+          name: crunched-bytes
+          path: Assets/Output/
