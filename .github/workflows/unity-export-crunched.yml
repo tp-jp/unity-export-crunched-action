@@ -20,7 +20,15 @@ jobs:
             -batchmode \
             -projectPath . \
             -executeMethod ExportCrunchedBytes.Export \
+            -logFile - \
             -quit
+
+      - name: Upload Unity log if failed
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: unity-editor-log
+          path: /root/.config/unity3d/Editor.log
 
       - name: Upload exported bytes
         uses: actions/upload-artifact@v4
