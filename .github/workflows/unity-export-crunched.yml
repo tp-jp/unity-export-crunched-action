@@ -27,7 +27,7 @@ jobs:
       - name: Export Crunched Textures
         run: |
           xvfb-run --auto-servernum --server-args='-screen 0 640x480x24' \
-          unity \
+          unity-editor \
             -batchmode \
             -projectPath . \
             -executeMethod ExportCrunchedBytes.Export \
