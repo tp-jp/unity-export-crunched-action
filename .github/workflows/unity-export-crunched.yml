@@ -16,9 +16,12 @@ jobs:
       - name: Set up Unity license manually
         run: |
           mkdir -p ~/.local/share/unity3d
+          mkdir -p ~/.local/share/unity3d/Unity
           mkdir -p ~/.cache/unity3d
           mkdir -p ~/.config/unity3d
           echo "${{ secrets.UNITY_LICENSE }}" > ~/.local/share/unity3d/Unity_lic.ulf
+          echo "${{ secrets.UNITY_LICENSE }}" > ~/.local/share/unity3d/Unity/Unity_lic.ulf
+          
 
       - name: Debug whoami and license path
         run: |
