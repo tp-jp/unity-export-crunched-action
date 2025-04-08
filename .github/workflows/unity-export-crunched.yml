@@ -13,23 +13,29 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Set up Unity license
-        run: |
-          mkdir -p ~/.local/share/unity3d
-          echo "${{ secrets.UNITY_LICENSE }}" > ~/.local/share/unity3d/Unity_lic.ulf
-          echo "${{ secrets.UNITY_LICENSE }}" > ~/.local/share/unity3d/Unity_v2022.x.ulf
+      - name: Activate Unity
+        uses: game-ci/unity-activate@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+
+      #- name: Set up Unity license
+      #  run: |
+      #    mkdir -p ~/.local/share/unity3d
+      #    echo "${{ secrets.UNITY_LICENSE }}" > ~/.local/share/unity3d/Unity_lic.ulf
+      #    echo "${{ secrets.UNITY_LICENSE }}" > ~/.local/share/unity3d/Unity_v2022.x.ulf
 
       - name: Export Crunched Textures
         run: |
           xvfb-run --auto-servernum --server-args='-screen 0 640x480x24' \
-          unity-editor \
+          unity \
             -batchmode \
             -projectPath . \
             -executeMethod ExportCrunchedBytes.Export \
             -logFile - \
-            -username ${{ secrets.UNITY_EMAIL }} \
-            -password ${{ secrets.UNITY_PASSWORD }} \
             -quit
+
+#-username ${{ secrets.UNITY_EMAIL }} \
+#-password ${{ secrets.UNITY_PASSWORD }} \
 
       # Unityプロジェクトのビルド
       # 設定しない場合、buildフォルダに出力される
