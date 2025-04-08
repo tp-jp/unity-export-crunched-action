@@ -65,7 +65,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: unity-editor-log
-          path: /root/.config/unity3d/Editor.log
+          path: ~/.config/unity3d/Editor.log
 
       - name: Upload exported bytes
         uses: actions/upload-artifact@v4
