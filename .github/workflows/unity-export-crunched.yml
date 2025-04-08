@@ -20,6 +20,17 @@ jobs:
           mkdir -p ~/.config/unity3d
           echo "${{ secrets.UNITY_LICENSE }}" | base64 -d > ~/.local/share/unity3d/Unity_lic.ulf
 
+      - name: Place license file for root (just in case)
+        run: |
+          sudo mkdir -p /root/.local/share/unity3d
+          echo "${{ secrets.UNITY_LICENSE }}" | base64 -d | sudo tee /root/.local/share/unity3d/Unity_lic.ulf > /dev/null
+
+      - name: Debug whoami and license path
+        run: |
+          whoami
+          ls -la ~/.local/share/unity3d/
+          sudo ls -la /root/.local/share/unity3d/
+
 #      - name: Set up Unity license
 #        run: |
 
@@ -32,6 +43,7 @@ jobs:
           xvfb-run --auto-servernum --server-args='-screen 0 640x480x24' \
           unity-editor \
             -batchmode \
+            -nographics \
             -projectPath . \
             -executeMethod ExportCrunchedBytes.Export \
             -logFile - \
