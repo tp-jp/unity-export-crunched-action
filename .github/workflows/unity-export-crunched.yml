@@ -6,39 +6,44 @@ on:
 jobs:
   export:
     runs-on: ubuntu-latest
-#    container:
-#      image: unityci/editor:ubuntu-2022.3.22f1-base-3.1.0
+    container:
+      image: unityci/editor:ubuntu-2022.3.22f1-base-3.1.0
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      #- name: Set up Unity license
-      #  run: |
-      #    mkdir -p ~/.local/share/unity3d
-      #    echo "${{ secrets.UNITY_LICENSE }}" > ~/.local/share/unity3d/Unity_lic.ulf
-      #    echo "${{ secrets.UNITY_LICENSE }}" > ~/.local/share/unity3d/Unity_v2022.x.ulf
+      - name: Set up Unity license manually
+        run: |
+          mkdir -p ~/.local/share/unity3d/
+          echo "${{ secrets.UNITY_LICENSE }}" > ~/.local/share/unity3d/Unity_lic.ulf
 
-#      - name: Export Crunched Textures
+#      - name: Set up Unity license
 #        run: |
-#          xvfb-run --auto-servernum --server-args='-screen 0 640x480x24' \
-#          unity \
-#            -batchmode \
-#            -projectPath . \
-#            -executeMethod ExportCrunchedBytes.Export \
-#            -logFile - \
-#            -quit
+#          mkdir -p ~/.local/share/unity3d
+#          echo "${{ secrets.UNITY_LICENSE }}" > ~/.local/share/unity3d/Unity_lic.ulf
+#          echo "${{ secrets.UNITY_LICENSE }}" > ~/.local/share/unity3d/Unity_v2022.x.ulf
 
-      - name: Run custom Unity method
-        uses: game-ci/unity-builder@v4
-        env:
-          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-        with:
-          unityVersion: 2022.3.22f1
-          targetPlatform: StandaloneWindows64
-          customParameters: -executeMethod ExportCrunchedBytes.Export
+      - name: Export Crunched Textures
+        run: |
+          xvfb-run --auto-servernum --server-args='-screen 0 640x480x24' \
+          unity \
+            -batchmode \
+            -projectPath . \
+            -executeMethod ExportCrunchedBytes.Export \
+            -logFile - \
+            -quit
+
+#      - name: Run custom Unity method
+#        uses: game-ci/unity-builder@v4
+#        env:
+#          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+#          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+#          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+#        with:
+#          unityVersion: 2022.3.22f1
+#          targetPlatform: StandaloneWindows64
+#          customParameters: -executeMethod ExportCrunchedBytes.Export
 
       - name: Upload Unity log if failed
         if: failure()
