@@ -27,6 +27,7 @@ jobs:
         run: |
           whoami
           ls -la ~/.local/share/unity3d/
+          ls -la ~/.local/share/unity3d/Unity/
 
 #      - name: Set up Unity license
 #        run: |
@@ -44,6 +45,8 @@ jobs:
             -projectPath . \
             -executeMethod ExportCrunchedBytes.Export \
             -logFile - \
+            -username ${{ secrets.UNITY_EMAIL }}  \
+            -password ${{ secrets.UNITY_PASSWORD }}  \
             -quit
 
 #      - name: Run custom Unity method
