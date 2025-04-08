@@ -75,3 +75,6 @@ crashlytics-build.properties
 
 # JetBrain
 .idea
+
+# Output
+/[Aa]ssets/Output/
