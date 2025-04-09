@@ -10,8 +10,8 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  UNITY_VERSION: 6000.0.11f1
-  ULF_FILE: Unity_v6000.x.ulf
+  UNITY_VERSION: 2022.3.22f1
+  ULF_FILE: Unity_v2022.x.ulf
 
 jobs:
   request_alf:
@@ -28,7 +28,7 @@ jobs:
 
       # Upload artifact (Unity_v20XX.X.XXXX.alf)
       - name: Expose as artifact
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.alfFile.outputs.filePath }}
           path: ${{ steps.alfFile.outputs.filePath }}
