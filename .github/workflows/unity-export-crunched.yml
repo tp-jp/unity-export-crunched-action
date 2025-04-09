@@ -36,6 +36,16 @@ jobs:
 #          echo "${{ secrets.UNITY_LICENSE }}" > ~/.local/share/unity3d/Unity_lic.ulf
 #          echo "${{ secrets.UNITY_LICENSE }}" > ~/.local/share/unity3d/Unity_v2022.x.ulf
 
+      - name: License Auth
+        run: |
+          unity-editor \
+            -batchmode \
+            -nographics \
+            -quit \
+            -silent-crashes \
+            -logFile ./Assets/Output/ \
+            -manualLicenseFile ~/.local/share/unity3d/Unity_lic.ulf
+
       - name: Export Crunched Textures
         run: |
           xvfb-run --auto-servernum --server-args='-screen 0 640x480x24' \
@@ -45,9 +55,9 @@ jobs:
             -projectPath . \
             -executeMethod ExportCrunchedBytes.Export \
             -logFile - \
-            -username ${{ secrets.UNITY_EMAIL }}  \
-            -password ${{ secrets.UNITY_PASSWORD }}  \
             -quit
+#            -username ${{ secrets.UNITY_EMAIL }}  \
+#            -password ${{ secrets.UNITY_PASSWORD }}  \
 
 #      - name: Run custom Unity method
 #        uses: game-ci/unity-builder@v4
