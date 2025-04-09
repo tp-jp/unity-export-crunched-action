@@ -44,7 +44,7 @@ jobs:
             -nographics \
             -quit \
             -silent-crashes \
-            -logFile ./Assets/Output/ \
+            -logFile - \
             -manualLicenseFile ./license/Unity_lic.ulf
 
       - name: Export Crunched Textures
