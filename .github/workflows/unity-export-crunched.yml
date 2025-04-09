@@ -13,30 +13,6 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: '16'
-
-      - name: Install node package, `unity-license-activate`
-        run: npm install --global unity-license-activate
-
-      - name: Activate the license
-        run: unity-license-activate "${{ secrets.UNITY_EMAIL }}" "${{ secrets.UNITY_PASSWORD }}" "${{ needs.request_alf.outputs.alf }}"
-
-      - name: Read ulf
-        id: ulfRead
-        uses: juliangruber/read-file-action@v1.1.4
-        with:
-          path: ${{ env.ULF_FILE }}
-
-      - name: Update secret UNITY_LICENSE
-        uses: hmanzur/actions-set-secret@v2.0.0
-        with:
-          name: 'UNITY_LICENSE'
-          value: '${{ steps.ulfRead.outputs.content }}'
-          token: ${{ secrets.ACCESS_TOKEN }}
-
 #      - name: Set up Unity license manually
 #        run: |
 #          mkdir -p ~/.local/share/unity3d
@@ -105,40 +81,3 @@ jobs:
         with:
           name: crunched-bytes
           path: Assets/Output/
-  acquire_ulf:
-    needs: [request_alf]
-    name: Acquire .ulf file 🔑
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download .alf artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: ${{ needs.request_alf.outputs.alf }}
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-
-      - name: Install node package, `unity-license-activate`
-        run: npm install --global unity-license-activate
-
-      - name: Install node package, `unity-verify-code`
-        run: npm install --global unity-verify-code
-
-      - name: Activate the license
-        continue-on-error: true
-        run: unity-license-activate "${{ secrets.UNITY_EMAIL }}" "${{ secrets.UNITY_PASSWORD }}" "${{ needs.request_alf.outputs.alf }}"
-
-      - name: Read ulf
-        id: ulfRead
-        uses: juliangruber/read-file-action@v1.1.4
-        with:
-          path: ${{ env.ULF_FILE }}
-
-      - name: Update secret UNITY_LICENSE
-        uses: hmanzur/actions-set-secret@v2.0.0
-        with:
-          name: 'UNITY_LICENSE'
-          value: '${{ steps.ulfRead.outputs.content }}'
-          token: ${{ secrets.ACCESS_TOKEN }}
