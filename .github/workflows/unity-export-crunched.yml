@@ -6,46 +6,10 @@ on:
 jobs:
   request_alf:
     runs-on: ubuntu-latest
-    container:
-      image: unityci/editor:ubuntu-2022.3.22f1-base-3.1.0
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-
-#      - name: Set up Unity license manually
-#        run: |
-#          mkdir -p ~/.local/share/unity3d
-#          mkdir -p ~/.local/share/unity3d/Unity
-#          mkdir -p ~/.cache/unity3d
-#          mkdir -p ~/.config/unity3d
-#          mkdir -p ./license
-#          echo '${{ secrets.UNITY_LICENSE }}' > ~/.local/share/unity3d/Unity_lic.ulf
-#          echo '${{ secrets.UNITY_LICENSE }}' > ~/.local/share/unity3d/Unity/Unity_lic.ulf
-#          echo '${{ secrets.UNITY_LICENSE }}' > ./license/Unity_lic.ulf
-          
-
-#      - name: Debug whoami and license path
-#        run: |
-#          whoami
-#          ls -la ~/.local/share/unity3d/
-#          ls -la ~/.local/share/unity3d/Unity/
-
-#      - name: Set up Unity license
-#        run: |
-#          mkdir -p ~/.local/share/unity3d
-#          echo "${{ secrets.UNITY_LICENSE }}" > ~/.local/share/unity3d/Unity_lic.ulf
-#          echo "${{ secrets.UNITY_LICENSE }}" > ~/.local/share/unity3d/Unity_v2022.x.ulf
-
-#      - name: License Auth
-#        run: |
-#          unity-editor \
-#            -batchmode \
-#            -nographics \
-#            -quit \
-#            -silent-crashes \
-#            -logFile - \
-#            -manualLicenseFile ./license/Unity_lic.ulf
 
       - name: Export Crunched Textures
         run: |
@@ -58,23 +22,15 @@ jobs:
             -logFile - \
             -quit
 
-#      - name: Run custom Unity method
-#        uses: game-ci/unity-builder@v4
-#        env:
-#          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-#          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-#          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-#        with:
-#          unityVersion: 2022.3.22f1
-#          targetPlatform: StandaloneWindows64
-#          customParameters: -executeMethod ExportCrunchedBytes.Export
-
-      - name: Upload Unity log if failed
-        if: failure()
-        uses: actions/upload-artifact@v4
+      - name: Run the Windows build
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
-          name: unity-editor-log
-          path: ~/.config/unity3d/Editor.log
+          targetPlatform: StandaloneWindows64
+          unityVersion: 2022.3.22f1
 
       - name: Upload exported bytes
         uses: actions/upload-artifact@v4
