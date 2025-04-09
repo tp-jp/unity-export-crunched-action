@@ -14,13 +14,10 @@ jobs:
       - name: Cache Unity Library
         uses: actions/cache@v4
         with:
-          path: |
-            Library
-            .unitypackage-manager
-            .upm
-          key: Library-${{ runner.os }}-${{ hashFiles('**/Packages/manifest.json') }}
+          path: Library
+          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
           restore-keys: |
-            Library-${{ runner.os }}-
+            Library-
 
       - name: Run the Windows build
         uses: game-ci/unity-builder@v4
