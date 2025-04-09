@@ -4,23 +4,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  request_alf:
+  export:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-
-      - name: Export Crunched Textures
-        run: |
-          xvfb-run --auto-servernum --server-args='-screen 0 640x480x24' \
-          unity-editor \
-            -batchmode \
-            -nographics \
-            -projectPath . \
-            -executeMethod ExportCrunchedBytes.Export \
-            -logFile - \
-            -quit
 
       - name: Run the Windows build
         uses: game-ci/unity-builder@v4
