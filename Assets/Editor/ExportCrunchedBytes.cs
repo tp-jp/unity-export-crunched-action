@@ -2,7 +2,7 @@ using UnityEditor;
 using UnityEngine;
 using System.IO;
 
-public class ExportCrunchedBytes
+public class ExportCrunchedTextures
 {
     [MenuItem("Tools/Export Crunched Textures")]
     public static void Export()
