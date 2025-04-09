@@ -20,9 +20,9 @@ jobs:
           mkdir -p ~/.cache/unity3d
           mkdir -p ~/.config/unity3d
           mkdir -p ./license
-          echo "${{ secrets.UNITY_LICENSE }}" > ~/.local/share/unity3d/Unity_lic.ulf
-          echo "${{ secrets.UNITY_LICENSE }}" > ~/.local/share/unity3d/Unity/Unity_lic.ulf
-          echo "${{ secrets.UNITY_LICENSE }}" > ./license/Unity_lic.ulf
+          echo '${{ secrets.UNITY_LICENSE }}' > ~/.local/share/unity3d/Unity_lic.ulf
+          echo '${{ secrets.UNITY_LICENSE }}' > ~/.local/share/unity3d/Unity/Unity_lic.ulf
+          echo '${{ secrets.UNITY_LICENSE }}' > ./license/Unity_lic.ulf
           
 
       - name: Debug whoami and license path
