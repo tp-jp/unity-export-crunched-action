@@ -79,6 +79,7 @@ public class ExportCrunchedTextures
         }
         
         Debug.Log("すべての処理が完了しました。");
+        EditorApplication.Exit(0);
     }
 
     static string GetArgument(string[] args, string name)
