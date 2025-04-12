@@ -25,6 +25,8 @@ jobs:
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          INPUT_PATH: Assets/Textures
+          OUTPUT_PATH: Assets/Output
         with:
           targetPlatform: StandaloneWindows64
           unityVersion: 2022.3.22f1
