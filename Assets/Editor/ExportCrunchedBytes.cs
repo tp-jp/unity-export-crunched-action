@@ -77,7 +77,7 @@ namespace Editor
                 var outputFileName = Path.GetFileNameWithoutExtension(filePath) + ".crn";
                 var outputFilePath = Path.Combine(outputPath, outputFileName);
 
-                File.WriteAllBytes(outputPath, rawData);
+                File.WriteAllBytes(outputFilePath, rawData);
                 Debug.Log($"出力完了: {outputFilePath}");
             }
         
