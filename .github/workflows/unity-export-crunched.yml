@@ -28,8 +28,8 @@ jobs:
         with:
           targetPlatform: StandaloneWindows64
           unityVersion: 2022.3.22f1
-          buildMethod: Editor.ExportCrunchedTextures.Build
-          customParameters: -inputPath Assets/Textures -outputPath Assets/Output
+          buildMethod: Editor.BuildScript.Build
+          customParameters: -inputPath Assets/Textures -outputPath Assets/Output -maxSize 2048 -compressionQuality 50
 
       - name: Upload exported bytes
         uses: actions/upload-artifact@v4
