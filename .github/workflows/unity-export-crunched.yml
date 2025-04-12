@@ -25,11 +25,11 @@ jobs:
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-          INPUT_PATH: Assets/Textures
-          OUTPUT_PATH: Assets/Output
         with:
           targetPlatform: StandaloneWindows64
           unityVersion: 2022.3.22f1
+          buildMethod: ExportCrunchedTextures.Export
+          customParameters: -inputPath Assets/Textures -outputPath Assets/Output
 
       - name: Upload exported bytes
         uses: actions/upload-artifact@v4

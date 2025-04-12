@@ -8,22 +8,32 @@ public class ExportCrunchedTextures
     [MenuItem("Tools/Export Crunched Textures")]
     public static void Export()
     {
-        var inputPath = Environment.GetEnvironmentVariable("INPUT_PATH");
-        var outputPath = Environment.GetEnvironmentVariable("OUTPUT_PATH");
+        var args = Environment.GetCommandLineArgs();
+        var inputPath = GetArgument(args, "inputPath");
+        var outputPath = GetArgument(args, "outputPath");
 
-        if (string.IsNullOrEmpty(inputPath) || string.IsNullOrEmpty(outputPath))
+        if (string.IsNullOrEmpty(inputPath))
         {
-            Debug.LogError("INPUT_PATH または OUTPUT_PATH が設定されていません。");
+            Debug.LogError("INPUT_PATH が設定されていません。");
+            EditorApplication.Exit(-1);
+            return;
+        }
+        if (string.IsNullOrEmpty(outputPath))
+        {
+            Debug.LogError("OUTPUT_PATH が設定されていません。");
+            EditorApplication.Exit(-1);
             return;
         }
         if (!Directory.Exists(inputPath))
         {
             Debug.LogError($"入力フォルダが存在しません: {inputPath}");
+            EditorApplication.Exit(-1);
             return;
         }
         if (!Directory.Exists(outputPath))
         {
             Debug.LogError($"出力フォルダが存在しません: {outputPath}");
+            EditorApplication.Exit(-1);
             return;
         }
 
@@ -69,5 +79,17 @@ public class ExportCrunchedTextures
         }
         
         Debug.Log("すべての処理が完了しました。");
+    }
+
+    static string GetArgument(string[] args, string name)
+    {
+        for (var i = 0; i < args.Length; i++)
+        {
+            if (args[i] == $"-{name}" && i + 1 < args.Length)
+            {
+                return args[i + 1];
+            }
+        }
+        return null;
     }
 }
