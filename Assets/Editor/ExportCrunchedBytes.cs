@@ -8,7 +8,7 @@ namespace Editor
     public static class ExportCrunchedTextures
     {
         [MenuItem("Tools/Export Crunched Textures")]
-        public static void Export()
+        public static void Build()
         {
             var args = Environment.GetCommandLineArgs();
             var inputPath = GetArgument(args, "inputPath");
@@ -42,12 +42,13 @@ namespace Editor
             var pngFiles = Directory.GetFiles(inputPath, "*.png", SearchOption.TopDirectoryOnly);
             foreach (var filePath in pngFiles)
             {
-                var relativePath = "Assets" + filePath.Replace(Application.dataPath, "").Replace("\\", "/");
+                var relativePath = filePath.Replace(Application.dataPath, "").Replace("\\", "/");
                 var importer = (TextureImporter)AssetImporter.GetAtPath(relativePath);
                 if (importer == null)
                 {
                     Debug.LogWarning($"TextureImporter が取得できませんでした: {relativePath}");
-                    continue;
+                    EditorApplication.Exit(-1);
+                    return;
                 }
 
                 importer.textureCompression = TextureImporterCompression.Compressed;

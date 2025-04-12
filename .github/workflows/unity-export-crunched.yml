@@ -28,7 +28,7 @@ jobs:
         with:
           targetPlatform: StandaloneWindows64
           unityVersion: 2022.3.22f1
-          buildMethod: Editor.ExportCrunchedTextures.Export
+          buildMethod: Editor.ExportCrunchedTextures.Build
           customParameters: -inputPath Assets/Textures -outputPath Assets/Output
 
       - name: Upload exported bytes
