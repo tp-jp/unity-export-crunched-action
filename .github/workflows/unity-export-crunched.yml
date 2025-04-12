@@ -34,5 +34,5 @@ jobs:
       - name: Upload exported bytes
         uses: actions/upload-artifact@v4
         with:
-          name: crunched-bytes
+          name: crunched-textures
           path: Assets/Output/
