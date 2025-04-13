@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 env:
-  OUTPUT_PATH: ${{ github.workspace }}/Output
+  OUTPUT_PATH: Output
 
 jobs:
   test:
@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Setup Output Directory
         run: |
-          mkdir -p ${{ env.OUTPUT_PATH }}
+          mkdir -p ${{ github.workspace }}/${{ env.OUTPUT_PATH }}
           echo "カレントディレクトリ:"
           pwd
           echo "カレントディレクトリの内容:"

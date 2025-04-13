@@ -69,4 +69,4 @@ runs:
         projectPath: ${{ env.PROJECT_PATH }}
         unityVersion: ${{ inputs.unity-version }}
         buildMethod: Editor.BuildScript.Build
-        customParameters: -inputPath ${{ inputs.input-path }} -outputPath ${{ inputs.output-path }} -maxSize ${{ inputs.max-size }} -compressionQuality ${{ inputs.compression-quality }}
+        customParameters: -inputPath ${{ inputs.input-path }} -outputPath /github/workspace/${{ inputs.output-path }} -maxSize ${{ inputs.max-size }} -compressionQuality ${{ inputs.compression-quality }}
