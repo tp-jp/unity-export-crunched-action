@@ -33,19 +33,20 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: Set Project Path
-      run: echo "PROJECT_PATH=unity-export-crunched-action" >> $GITHUB_ENV
+    - name: Set Local variables
+      id: vars
       shell: bash
+      run: echo "PROJECT_PATH=unity-export-crunched-action" >> $GITHUB_OUTPUT
 
     - name: Checkout repo
       uses: actions/checkout@v4
       with:
-        path: ${{ env.PROJECT_PATH }}
+        path: ${{ steps.vars.outputs.PROJECT_PATH }}
 
     - name: Cache Unity Library
       uses: actions/cache@v4
       with:
-        path: ${{ env.PROJECT_PATH }}/Library
+        path: ${{ steps.vars.outputs.PROJECT_PATH }}/Library
         key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
         restore-keys: |
           Library-
@@ -58,7 +59,7 @@ runs:
         UNITY_LICENSE: ${{ inputs.unity-license }}
       with:
         targetPlatform: StandaloneWindows64
-        projectPath: ${{ env.PROJECT_PATH }}
+        projectPath: ${{ steps.vars.outputs.PROJECT_PATH }}
         unityVersion: ${{ inputs.unity-version }}
         buildMethod: Editor.BuildScript.Build
         customParameters: -inputPath ${{ inputs.input-path }} -outputPath /github/workspace/${{ inputs.output-path }} -maxSize ${{ inputs.max-size }} -compressionQuality ${{ inputs.compression-quality }}
