@@ -52,9 +52,3 @@ runs:
         unityVersion: 2022.3.22f1
         buildMethod: Editor.BuildScript.Build
         customParameters: -inputPath ${{ inputs.input-path }} -outputPath ${{ inputs.output-path }} -maxSize ${{ inputs.max-size }} -compressionQuality ${{ inputs.compression-quality }}
-
-    - name: Upload exported bytes
-      uses: actions/upload-artifact@v4
-      with:
-        name: crunched-textures
-        path: ${{ inputs.output-path }}
