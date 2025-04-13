@@ -52,7 +52,6 @@ namespace Editor
                     });
 
                     AssetDatabase.ImportAsset(relativePath, ImportAssetOptions.ForceUpdate);
-                    AssetDatabase.Refresh();
 
                     var tex = AssetDatabase.LoadAssetAtPath<Texture2D>(relativePath);
                     if (tex == null)
