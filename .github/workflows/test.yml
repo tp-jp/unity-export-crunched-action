@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
 
 env:
+  INPUT_PATH: Input
   OUTPUT_PATH: Output
 
 jobs:
@@ -12,16 +13,17 @@ jobs:
     steps:
       - name: Setup Output Directory
         run: |
+          mkdir -p ${{ github.workspace }}/${{ env.INPUT_PATH }}
           mkdir -p ${{ github.workspace }}/${{ env.OUTPUT_PATH }}
-          echo "カレントディレクトリ:"
-          pwd
-          echo "カレントディレクトリの内容:"
-          ls -la
+
+      - name: Download Test Image
+        run: |
+          curl -o ${{ github.workspace }}/${{ env.INPUT_PATH }}/001.png https://raw.githubusercontent.com/tp-jp/unity-export-crunched-action/refs/heads/main/Assets/Textures/001.png
 
       - name: Export Crunched Textures
         uses: tp-jp/unity-export-crunched-action@main
         with:
-          input-path: Assets/Textures
+          input-path: ${{ env.INPUT_PATH }}
           output-path: ${{ env.OUTPUT_PATH }}
           unity-email: ${{ secrets.UNITY_EMAIL }}
           unity-password: ${{ secrets.UNITY_PASSWORD }}
