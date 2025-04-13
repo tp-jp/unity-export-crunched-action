@@ -43,6 +43,11 @@ runs:
       with:
         path: ${{ steps.vars.outputs.PROJECT_PATH }}
 
+    - name: Copy PNG files to Assets/Input
+      shell: bash
+      run: |
+        cp ${{ github.workspace }}/${{ inputs.input-path }}/*.png ${{ steps.vars.outputs.PROJECT_PATH }}/Assets/Input/
+
     - name: Cache Unity Library
       uses: actions/cache@v4
       with:
