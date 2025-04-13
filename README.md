@@ -54,6 +54,3 @@ jobs:
 - Unityの認証情報（メールアドレス、パスワード、ライセンスキー）はGitHub Secretsに保存してください。
 - 入力ディレクトリのパス と 出力ディレクトリのパス は必ず `github.workspace` 配下に作成してください。  
   例: input-path: 'input' や output-path: 'output' のように指定します。
-
-## ライセンス
-このアクションは[MITライセンス](LICENSE)の下で提供されています。
