@@ -46,7 +46,7 @@ runs:
       env:
         UNITY_EMAIL: ${{ inputs.unity-email }}
         UNITY_PASSWORD: ${{ inputs.unity-password }}
-        UNITY_LICENSE: ${{ secrets.unity-license }}
+        UNITY_LICENSE: ${{ inputs.unity-license }}
       with:
         targetPlatform: StandaloneWindows64
         unityVersion: 2022.3.22f1
