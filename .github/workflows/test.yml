@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Setup Output Directory
         run: |
-          mkdir -p ./Output
+          mkdir -p ${{ env.OUTPUT_PATH }}
 
       - name: Export Crunched Textures
         uses: tp-jp/unity-export-crunched-action@main

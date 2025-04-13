@@ -17,6 +17,24 @@ namespace Editor
                 var outputPath = cmdArgs.GetRequired<string>("outputPath");
                 var maxSize = cmdArgs.Get("maxSize", 2048);
                 var compressionQuality = cmdArgs.Get("compressionQuality", 50);
+                
+                // TODO: DEBUG
+                var currentDirectory = Directory.GetCurrentDirectory();
+                Console.WriteLine($"カレントディレクトリ: {currentDirectory}");
+
+                var directories = Directory.GetDirectories(currentDirectory);
+                Console.WriteLine("フォルダ一覧:");
+                foreach (var dir in directories)
+                {
+                    Console.WriteLine($"- {dir}");
+                }
+
+                var files = Directory.GetFiles(currentDirectory);
+                Console.WriteLine("ファイル一覧:");
+                foreach (var file in files)
+                {
+                    Console.WriteLine($"- {file}");
+                }
 
                 if (!Directory.Exists(inputPath))
                 {
@@ -25,7 +43,7 @@ namespace Editor
 
                 if (!Directory.Exists(outputPath))
                 {
-                    throw new Exception($"出力フォルダが存在しません: {inputPath}");
+                    throw new Exception($"出力フォルダが存在しません: {outputPath}");
                 }
 
                 var pngFiles = Directory.GetFiles(inputPath, "*.png", SearchOption.TopDirectoryOnly);
@@ -75,7 +93,7 @@ namespace Editor
             }
             catch (ArgumentException ex)
             {
-                Debug.LogError(ex.Message);
+                // Debug.LogError(ex.Message);
                 Console.Error.WriteLine(ex.Message);
                 Environment.Exit(-1);
             }
