@@ -1,0 +1,60 @@
+name: 'Unity Export Crunched Action'
+description: 'Export crunched texture assets from Unity project'
+author: 'tp-jp'
+
+inputs:
+  input-path:
+    description: 'Paths to input directory'
+    required: true
+  output-path:
+    description: 'Path to output directory'
+    required: true
+  unity-email:
+    description: 'Email for Unity authentication'
+    required: true
+  unity-password:
+    description: 'Password for Unity authentication'
+    required: true
+  unity-license:
+    description: 'Unity license for activation'
+    required: true
+  max-size:
+    description: 'Maximum size of texture (pixels)'
+    required: false
+    default: '2048'
+  compression-quality:
+    description: 'Compression quality (0-100)'
+    required: false
+    default: '50'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+
+    - name: Cache Unity Library
+      uses: actions/cache@v4
+      with:
+        path: Library
+        key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+        restore-keys: |
+          Library-
+
+    - name: Run the Windows build
+      uses: game-ci/unity-builder@v4
+      env:
+        UNITY_EMAIL: ${{ inputs.unity-email }}
+        UNITY_PASSWORD: ${{ inputs.unity-password }}
+        UNITY_LICENSE: ${{ secrets.unity-license }}
+      with:
+        targetPlatform: StandaloneWindows64
+        unityVersion: 2022.3.22f1
+        buildMethod: Editor.BuildScript.Build
+        customParameters: -inputPath ${{ inputs.input-path }} -outputPath ${{ inputs.output-path }} -maxSize ${{ inputs.max-size }} -compressionQuality ${{ inputs.compression-quality }}
+
+    - name: Upload exported bytes
+      uses: actions/upload-artifact@v4
+      with:
+        name: crunched-textures
+        path: ${{ inputs.output-path }}

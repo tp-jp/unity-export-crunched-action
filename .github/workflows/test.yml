@@ -1,0 +1,26 @@
+name: Test Export Crunched Textures
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Export Crunched Textures
+        uses: ./
+        with:
+          input-path: Assets/Textures
+          output-path: Assets/Output
+          unity-email: ${{ secrets.UNITY_EMAIL }}
+          unity-password: ${{ secrets.UNITY_PASSWORD }}
+          unity-license: ${{ secrets.UNITY_LICENSE }}
+          max-size: 2048
+          compression-quality: 50
+
+      - name: Upload exported bytes
+        uses: actions/upload-artifact@v4
+        with:
+          name: crunched-textures
+          path: Assets/Output/
