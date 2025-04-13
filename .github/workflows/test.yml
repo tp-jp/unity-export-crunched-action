@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 env:
-  OUTPUT_PATH: ./Output
+  OUTPUT_PATH: ${{ github.workspace }}/Output
 
 jobs:
   test:
