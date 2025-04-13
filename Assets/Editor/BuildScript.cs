@@ -27,9 +27,7 @@ namespace Editor
 
                 if (!Directory.Exists(outputPath))
                 {
-                    Debug.LogError($"出力フォルダが存在しません: {outputPath}");
-                    EditorApplication.Exit(-1);
-                    return;
+                    Directory.CreateDirectory(outputPath);
                 }
 
                 var pngFiles = Directory.GetFiles(inputPath, "*.png", SearchOption.TopDirectoryOnly);
