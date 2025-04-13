@@ -33,10 +33,24 @@ inputs:
 runs:
   using: 'composite'
   steps:
+    - name: Check Output Directory
+      run: |
+        echo "カレントディレクトリ:"
+        pwd
+        echo "カレントディレクトリの内容:"
+        ls -la
+
     - name: Checkout repo
       uses: actions/checkout@v4
       with:
         clean: false
+
+    - name: Check Output Directory
+      run: |
+        echo "カレントディレクトリ:"
+        pwd
+        echo "カレントディレクトリの内容:"
+        ls -la
 
     - name: Cache Unity Library
       uses: actions/cache@v4
@@ -45,6 +59,13 @@ runs:
         key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
         restore-keys: |
           Library-
+
+    - name: Check Output Directory
+      run: |
+        echo "カレントディレクトリ:"
+        pwd
+        echo "カレントディレクトリの内容:"
+        ls -la
 
     - name: Run the Windows build
       uses: game-ci/unity-builder@v4
