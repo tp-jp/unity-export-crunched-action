@@ -27,8 +27,8 @@ jobs:
       - name: Run Unity Export Crunched Action
         uses: tp-jp/unity-export-crunched-action@main
         with:
-          input-path: '${{ github.workspace }}/input'
-          output-path: '${{ github.workspace }}/output'
+          input-path: 'path/to/input'
+          output-path: 'path/to/output'
           unity-email: ${{ secrets.UNITY_EMAIL }}
           unity-password: ${{ secrets.UNITY_PASSWORD }}
           unity-license: ${{ secrets.UNITY_LICENSE }}
