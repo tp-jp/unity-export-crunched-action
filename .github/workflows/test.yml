@@ -18,7 +18,7 @@ jobs:
 
       - name: Download Test Image
         run: |
-          curl -o ${{ github.workspace }}/${{ env.INPUT_PATH }}/001.png https://raw.githubusercontent.com/tp-jp/unity-export-crunched-action/refs/heads/main/Assets/Textures/001.png
+          curl -o ${{ github.workspace }}/${{ env.INPUT_PATH }}/001.png https://github.com/user-attachments/assets/df4a2369-0a6a-474d-b4d5-43d48bf5123f
 
       - name: Export Crunched Textures
         uses: tp-jp/unity-export-crunched-action@main
