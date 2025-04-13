@@ -33,7 +33,7 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: Check Output Directory
+    - name: Check Output Directory1
       run: |
         echo "カレントディレクトリ:"
         pwd
@@ -43,10 +43,8 @@ runs:
 
     - name: Checkout repo
       uses: actions/checkout@v4
-      with:
-        clean: false
 
-    - name: Check Output Directory
+    - name: Check Output Directory2
       run: |
         echo "カレントディレクトリ:"
         pwd
@@ -54,15 +52,15 @@ runs:
         ls -la
       shell: bash
 
-    - name: Cache Unity Library
-      uses: actions/cache@v4
-      with:
-        path: Library
-        key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
-        restore-keys: |
-          Library-
+#    - name: Cache Unity Library
+#      uses: actions/cache@v4
+#      with:
+#        path: Library
+#        key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+#        restore-keys: |
+#          Library-
 
-    - name: Check Output Directory
+    - name: Check Output Directory3
       run: |
         echo "カレントディレクトリ:"
         pwd
