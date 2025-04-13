@@ -35,9 +35,7 @@ namespace Editor
                     var importer = (TextureImporter)AssetImporter.GetAtPath(relativePath);
                     if (importer == null)
                     {
-                        Debug.LogWarning($"TextureImporter が取得できませんでした: {relativePath}");
-                        EditorApplication.Exit(-1);
-                        return;
+                        throw new Exception($"TextureImporter が取得できませんでした: {relativePath}");
                     }
 
                     importer.textureCompression = TextureImporterCompression.Compressed;
@@ -54,12 +52,12 @@ namespace Editor
                     });
 
                     AssetDatabase.ImportAsset(relativePath, ImportAssetOptions.ForceUpdate);
+                    AssetDatabase.Refresh();
 
                     var tex = AssetDatabase.LoadAssetAtPath<Texture2D>(relativePath);
                     if (tex == null)
                     {
-                        Debug.LogWarning($"Texture2D がロードできませんでした: {relativePath}");
-                        continue;
+                        throw new Exception($"Texture2D がロードできませんでした: {relativePath}");
                     }
 
                     var rawData = tex.GetRawTextureData();
