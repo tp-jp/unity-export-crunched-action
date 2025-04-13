@@ -9,7 +9,7 @@ jobs:
 
     steps:
       - name: Export Crunched Textures
-        uses: ./
+        uses: tp-jp/unity-export-crunched-action@main
         with:
           input-path: Assets/Textures
           output-path: Assets/Output
