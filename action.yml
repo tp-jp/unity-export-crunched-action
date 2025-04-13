@@ -18,6 +18,9 @@ inputs:
   unity-license:
     description: 'Unity license for activation'
     required: true
+  unity-version:
+    description: 'Unity version'
+    default: 2022.3.22f1
   max-size:
     description: 'Maximum size of texture (pixels)'
     required: false
@@ -49,6 +52,6 @@ runs:
         UNITY_LICENSE: ${{ inputs.unity-license }}
       with:
         targetPlatform: StandaloneWindows64
-        unityVersion: 2022.3.22f1
+        unityVersion: ${{ inputs.unity-version }}
         buildMethod: Editor.BuildScript.Build
         customParameters: -inputPath ${{ inputs.input-path }} -outputPath ${{ inputs.output-path }} -maxSize ${{ inputs.max-size }} -compressionQuality ${{ inputs.compression-quality }}
