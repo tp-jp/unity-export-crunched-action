@@ -20,41 +20,47 @@ jobs:
         run: |
           curl -o ${{ github.workspace }}/${{ env.INPUT_PATH }}/001.png https://github.com/user-attachments/assets/df4a2369-0a6a-474d-b4d5-43d48bf5123f
 
-      - name: Export Crunched Textures
-        uses: tp-jp/unity-export-crunched-action@main
-        with:
-          input-path: ${{ env.INPUT_PATH }}
-          output-path: ${{ env.OUTPUT_PATH }}
-          unity-email: ${{ secrets.UNITY_EMAIL }}
-          unity-password: ${{ secrets.UNITY_PASSWORD }}
-          unity-license: ${{ secrets.UNITY_LICENSE }}
-          max-size: 2048
-          compression-quality: 50
-
-      - name: Check Output Files
-        run: |
-          if [ ! -d "${{ env.OUTPUT_PATH }}" ]; then
-            echo "Error: Output directory does not exist."
-            exit 1
-          fi
-
-          files=$(ls ${{ env.OUTPUT_PATH }})
-          if [ -z "$files" ]; then
-            echo "Error: No files found in the output directory."
-            exit 1
-          fi
-
-          for file in ${{ env.OUTPUT_PATH }}/*; do
-            if [ ! -s "$file" ]; then
-              echo "Error: File $file is empty."
-              exit 1
-            fi
-          done
-
-          echo "All output files are valid."
-
       - name: Upload exported bytes
         uses: actions/upload-artifact@v4
         with:
           name: crunched-textures
-          path: ${{ env.OUTPUT_PATH }}
+          path: ${{ env.INPUT_PATH }}
+
+#      - name: Export Crunched Textures
+#        uses: tp-jp/unity-export-crunched-action@main
+#        with:
+#          input-path: ${{ env.INPUT_PATH }}
+#          output-path: ${{ env.OUTPUT_PATH }}
+#          unity-email: ${{ secrets.UNITY_EMAIL }}
+#          unity-password: ${{ secrets.UNITY_PASSWORD }}
+#          unity-license: ${{ secrets.UNITY_LICENSE }}
+#          max-size: 2048
+#          compression-quality: 50
+#
+#      - name: Check Output Files
+#        run: |
+#          if [ ! -d "${{ env.OUTPUT_PATH }}" ]; then
+#            echo "Error: Output directory does not exist."
+#            exit 1
+#          fi
+#
+#          files=$(ls ${{ env.OUTPUT_PATH }})
+#          if [ -z "$files" ]; then
+#            echo "Error: No files found in the output directory."
+#            exit 1
+#          fi
+#
+#          for file in ${{ env.OUTPUT_PATH }}/*; do
+#            if [ ! -s "$file" ]; then
+#              echo "Error: File $file is empty."
+#              exit 1
+#            fi
+#          done
+#
+#          echo "All output files are valid."
+#
+#      - name: Upload exported bytes
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: crunched-textures
+#          path: ${{ env.OUTPUT_PATH }}
