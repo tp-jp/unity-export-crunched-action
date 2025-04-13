@@ -42,21 +42,13 @@ runs:
       with:
         path: ${{ env.PROJECT_PATH }}
 
-#    - name: Cache Unity Library
-#      uses: actions/cache@v4
-#      with:
-#        path: ${{ env.PROJECT_PATH }}/Library
-#        key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
-#        restore-keys: |
-#          Library-
-
-    - name: Check Output Directory3
-      run: |
-        echo "カレントディレクトリ:"
-        pwd
-        echo "カレントディレクトリの内容:"
-        ls -la
-      shell: bash
+    - name: Cache Unity Library
+      uses: actions/cache@v4
+      with:
+        path: ${{ env.PROJECT_PATH }}/Library
+        key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+        restore-keys: |
+          Library-
 
     - name: Run the Windows build
       uses: game-ci/unity-builder@v4

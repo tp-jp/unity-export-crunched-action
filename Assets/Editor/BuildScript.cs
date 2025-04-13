@@ -18,24 +18,6 @@ namespace Editor
                 var maxSize = cmdArgs.Get("maxSize", 2048);
                 var compressionQuality = cmdArgs.Get("compressionQuality", 50);
                 
-                // TODO: DEBUG
-                var currentDirectory = Directory.GetCurrentDirectory();
-                Console.WriteLine($"カレントディレクトリ: {currentDirectory}");
-
-                var directories = Directory.GetDirectories(currentDirectory);
-                Console.WriteLine("フォルダ一覧:");
-                foreach (var dir in directories)
-                {
-                    Console.WriteLine($"- {dir}");
-                }
-
-                var files = Directory.GetFiles(currentDirectory);
-                Console.WriteLine("ファイル一覧:");
-                foreach (var file in files)
-                {
-                    Console.WriteLine($"- {file}");
-                }
-
                 if (!Directory.Exists(inputPath))
                 {
                     throw new Exception($"入力フォルダが存在しません: {inputPath}");
