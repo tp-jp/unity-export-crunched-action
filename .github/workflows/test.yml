@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
 
 env:
-  INPUT_PATH: Input
-  OUTPUT_PATH: Output
+  INPUT_PATH: input
+  OUTPUT_PATH: output
 
 jobs:
   test:
