@@ -4,7 +4,7 @@ author: 'tp-jp'
 
 inputs:
   input-path:
-    description: 'Paths to input directory'
+    description: 'Path to input directory'
     required: true
   output-path:
     description: 'Path to output directory'
@@ -20,7 +20,7 @@ inputs:
     required: true
   unity-version:
     description: 'Unity version'
-    default: 2022.3.22f1
+    default: '2022.3.22f1'
   max-size:
     description: 'Maximum size of texture (pixels)'
     required: false
@@ -35,6 +35,8 @@ runs:
   steps:
     - name: Checkout repo
       uses: actions/checkout@v4
+      with:
+        clean: false
 
     - name: Cache Unity Library
       uses: actions/cache@v4

@@ -10,6 +10,10 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - name: Setup Output Directory
+        run: |
+          mkdir -p ./Output
+
       - name: Export Crunched Textures
         uses: tp-jp/unity-export-crunched-action@main
         with:

@@ -20,14 +20,12 @@ namespace Editor
 
                 if (!Directory.Exists(inputPath))
                 {
-                    Debug.LogError($"入力フォルダが存在しません: {inputPath}");
-                    EditorApplication.Exit(-1);
-                    return;
+                    throw new Exception($"入力フォルダが存在しません: {inputPath}");
                 }
 
                 if (!Directory.Exists(outputPath))
                 {
-                    Directory.CreateDirectory(outputPath);
+                    throw new Exception($"出力フォルダが存在しません: {inputPath}");
                 }
 
                 var pngFiles = Directory.GetFiles(inputPath, "*.png", SearchOption.TopDirectoryOnly);
@@ -77,6 +75,7 @@ namespace Editor
             }
             catch (ArgumentException ex)
             {
+                Debug.LogError(ex.Message);
                 Console.Error.WriteLine(ex.Message);
                 Environment.Exit(-1);
             }
