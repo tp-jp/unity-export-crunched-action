@@ -3,6 +3,9 @@ name: Test unity-export-crunched-action
 on:
   workflow_dispatch:
 
+env:
+  OUTPUT_PATH: ./Output
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -11,15 +14,37 @@ jobs:
         uses: tp-jp/unity-export-crunched-action@main
         with:
           input-path: Assets/Textures
-          output-path: ./Output
+          output-path: ${{ env.OUTPUT_PATH }}
           unity-email: ${{ secrets.UNITY_EMAIL }}
           unity-password: ${{ secrets.UNITY_PASSWORD }}
           unity-license: ${{ secrets.UNITY_LICENSE }}
           max-size: 2048
           compression-quality: 50
 
+      - name: Check Output Files
+        run: |
+          if [ ! -d "${{ env.OUTPUT_PATH }}" ]; then
+            echo "Error: Output directory does not exist."
+            exit 1
+          fi
+
+          files=$(ls ${{ env.OUTPUT_PATH }})
+          if [ -z "$files" ]; then
+            echo "Error: No files found in the output directory."
+            exit 1
+          fi
+
+          for file in ${{ env.OUTPUT_PATH }}/*; do
+            if [ ! -s "$file" ]; then
+              echo "Error: File $file is empty."
+              exit 1
+            fi
+          done
+
+          echo "All output files are valid."
+
       - name: Upload exported bytes
         uses: actions/upload-artifact@v4
         with:
           name: crunched-textures
-          path: ./Output
+          path: ${{ env.OUTPUT_PATH }}
