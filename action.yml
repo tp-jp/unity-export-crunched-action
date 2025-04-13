@@ -43,6 +43,8 @@ runs:
 
     - name: Checkout repo
       uses: actions/checkout@v4
+      with:
+        path: ./unity-export-crunched-action
 
     - name: Check Output Directory2
       run: |
@@ -76,6 +78,7 @@ runs:
         UNITY_LICENSE: ${{ inputs.unity-license }}
       with:
         targetPlatform: StandaloneWindows64
+        projectPath: ./unity-export-crunched-action
         unityVersion: ${{ inputs.unity-version }}
         buildMethod: Editor.BuildScript.Build
         customParameters: -inputPath ${{ inputs.input-path }} -outputPath ${{ inputs.output-path }} -maxSize ${{ inputs.max-size }} -compressionQuality ${{ inputs.compression-quality }}
