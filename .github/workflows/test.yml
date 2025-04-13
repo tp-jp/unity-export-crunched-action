@@ -13,6 +13,10 @@ jobs:
       - name: Setup Output Directory
         run: |
           mkdir -p ${{ env.OUTPUT_PATH }}
+          echo "カレントディレクトリ:"
+          pwd
+          echo "カレントディレクトリの内容:"
+          ls -la
 
       - name: Export Crunched Textures
         uses: tp-jp/unity-export-crunched-action@main
