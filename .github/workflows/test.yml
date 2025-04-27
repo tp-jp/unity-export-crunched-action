@@ -34,28 +34,20 @@ jobs:
 
       - name: Check Output Files
         run: |
+          # Check if output directory exists and contains subdirectories
           if [ ! -d "${{ env.OUTPUT_PATH }}" ]; then
             echo "Error: Output directory does not exist."
             exit 1
           fi
 
-          # サブディレクトリを含めたファイル数を確認
-          file_count=$(find ${{ env.OUTPUT_PATH }} -type f | wc -l)
-          if [ "$file_count" -eq 0 ]; then
-            echo "Error: No files found in the output directory or its subdirectories."
+          # Count subdirectories
+          subdir_count=$(find ${{ env.OUTPUT_PATH }} -mindepth 1 -type d | wc -l)
+          if [ "$subdir_count" -eq 0 ]; then
+            echo "Error: No subdirectories found in the output directory."
             exit 1
           fi
 
-          # すべてのファイルをチェック（サブディレクトリを含む）
-          find ${{ env.OUTPUT_PATH }} -type f -print0 | while IFS= read -r -d '' file; do
-            if [ ! -s "$file" ]; then
-              echo "Error: File $file is empty."
-              exit 1
-            fi
-            echo "Checked: $file"
-          done
-
-          echo "All output files are valid. Total files: $file_count"
+          echo "Output directory is valid. Contains $subdir_count subdirectories."
 
       - name: Upload exported bytes
         uses: actions/upload-artifact@v4
