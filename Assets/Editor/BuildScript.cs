@@ -29,8 +29,9 @@ namespace Editor
                 }
 
                 Debug.Log($"カレントパス： {Environment.CurrentDirectory}");
-                Debug.Log($"入力パス： {inputPath}");
-                var pngFiles = Directory.GetFiles(inputPath, "*.png", SearchOption.AllDirectories);
+                var absoluteInputPath = Path.GetFullPath(inputPath);
+                Debug.Log($"入力パス： {absoluteInputPath}");
+                var pngFiles = Directory.GetFiles(absoluteInputPath, "*.png", SearchOption.AllDirectories);
                 Debug.Log($"対象ファイル: {pngFiles.Length}");
                 foreach (var filePath in pngFiles)
                 {
@@ -63,7 +64,7 @@ namespace Editor
                     }
 
                     var rawData = tex.GetRawTextureData();
-                    var relativeToInput = Path.GetRelativePath(inputPath, filePath);
+                    var relativeToInput = Path.GetRelativePath(absoluteInputPath, filePath);
                     var outputFileName = Path.ChangeExtension(relativeToInput, ".crn");
                     var outputFilePath = Path.Combine(outputPath, outputFileName);
                     Debug.Log($"出力ファイルパス: {outputFilePath}");
