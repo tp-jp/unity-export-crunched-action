@@ -53,8 +53,9 @@ runs:
           mkdir -p "${{ steps.vars.outputs.PROJECT_PATH }}/Assets/Input/$dir"
           cp "$file" "${{ steps.vars.outputs.PROJECT_PATH }}/Assets/Input/$file"
         done
-        ls ${{ steps.vars.outputs.PROJECT_PATH }}/Assets/Input
-        ls ${{ steps.vars.outputs.PROJECT_PATH }}/Assets/Input/sample
+        # コピー後のファイルの所有者とパーミッションを設定
+        chmod -R 755 "${{ steps.vars.outputs.PROJECT_PATH }}/Assets/Input"
+        ls -la "${{ steps.vars.outputs.PROJECT_PATH }}/Assets/Input"
 
     - name: Cache Unity Library
       uses: actions/cache@v4
