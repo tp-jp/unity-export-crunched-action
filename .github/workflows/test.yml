@@ -39,7 +39,7 @@ jobs:
             exit 1
           fi
 
-          files=$(ls ${{ env.OUTPUT_PATH }})
+          files=$(ls ${{ env.OUTPUT_PATH }}/sample/)
           if [ -z "$files" ]; then
             echo "Error: No files found in the output directory."
             exit 1
