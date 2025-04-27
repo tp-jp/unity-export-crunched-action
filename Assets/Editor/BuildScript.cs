@@ -28,7 +28,6 @@ namespace Editor
                     throw new Exception($"出力フォルダが存在しません: {outputPath}");
                 }
 
-                // Debug.Log($"入力パス： {absoluteInputPath}");
                 var absoluteInputPath = Path.GetFullPath(inputPath);
                 var pngFiles = Directory.GetFiles(inputPath, "*.png", SearchOption.AllDirectories);
                 foreach (var filePath in pngFiles)
