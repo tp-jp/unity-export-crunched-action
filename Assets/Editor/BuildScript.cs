@@ -28,7 +28,9 @@ namespace Editor
                     throw new Exception($"出力フォルダが存在しません: {outputPath}");
                 }
 
+                Debug.Log($"入力パス： {inputPath}");
                 var pngFiles = Directory.GetFiles(inputPath, "*.png", SearchOption.AllDirectories);
+                Debug.Log($"対象ファイル: {pngFiles.Length}");
                 foreach (var filePath in pngFiles)
                 {
                     var relativePath = filePath.Replace(Application.dataPath, "").Replace("\\", "/");
