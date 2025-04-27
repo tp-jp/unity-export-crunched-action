@@ -14,11 +14,12 @@ jobs:
       - name: Setup Output Directory
         run: |
           mkdir -p ${{ github.workspace }}/${{ env.INPUT_PATH }}
+          mkdir -p ${{ github.workspace }}/${{ env.INPUT_PATH }}/sample
           mkdir -p ${{ github.workspace }}/${{ env.OUTPUT_PATH }}
 
       - name: Download Test Image
         run: |
-          curl -o ${{ github.workspace }}/${{ env.INPUT_PATH }}/001.png https://raw.githubusercontent.com/tp-jp/unity-export-crunched-action/refs/heads/main/Tests/Input/001.png
+          curl -o ${{ github.workspace }}/${{ env.INPUT_PATH }}/sample/001.png https://raw.githubusercontent.com/tp-jp/unity-export-crunched-action/refs/heads/main/Tests/Input/001.png
 
       - name: Export Crunched Textures
         uses: tp-jp/unity-export-crunched-action@main

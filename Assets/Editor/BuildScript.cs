@@ -17,7 +17,7 @@ namespace Editor
                 var outputPath = cmdArgs.GetRequired<string>("outputPath");
                 var maxSize = cmdArgs.Get("maxSize", 2048);
                 var compressionQuality = cmdArgs.Get("compressionQuality", 50);
-                
+
                 if (!Directory.Exists(inputPath))
                 {
                     throw new Exception($"入力フォルダが存在しません: {inputPath}");
@@ -28,7 +28,7 @@ namespace Editor
                     throw new Exception($"出力フォルダが存在しません: {outputPath}");
                 }
 
-                var pngFiles = Directory.GetFiles(inputPath, "*.png", SearchOption.TopDirectoryOnly);
+                var pngFiles = Directory.GetFiles(inputPath, "*.png", SearchOption.AllDirectories);
                 foreach (var filePath in pngFiles)
                 {
                     var relativePath = filePath.Replace(Application.dataPath, "").Replace("\\", "/");
@@ -60,8 +60,16 @@ namespace Editor
                     }
 
                     var rawData = tex.GetRawTextureData();
-                    var outputFileName = Path.GetFileNameWithoutExtension(filePath) + ".crn";
+                    var relativeToInput = Path.GetRelativePath(inputPath, filePath);
+                    var outputFileName = Path.ChangeExtension(relativeToInput, ".crn");
                     var outputFilePath = Path.Combine(outputPath, outputFileName);
+
+                    // 出力ディレクトリが存在しない場合は作成
+                    var outputDirectory = Path.GetDirectoryName(outputFilePath);
+                    if (!Directory.Exists(outputDirectory))
+                    {
+                        Directory.CreateDirectory(outputDirectory);
+                    }
 
                     File.WriteAllBytes(outputFilePath, rawData);
                     Debug.Log($"出力完了: {outputFilePath}");
