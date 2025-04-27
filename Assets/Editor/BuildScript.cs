@@ -28,25 +28,9 @@ namespace Editor
                     throw new Exception($"出力フォルダが存在しません: {outputPath}");
                 }
 
-                AssetDatabase.Refresh();
-
-                Debug.Log($"カレントパス： {Environment.CurrentDirectory}");
+                // Debug.Log($"入力パス： {absoluteInputPath}");
                 var absoluteInputPath = Path.GetFullPath(inputPath);
-                Debug.Log($"入力パス： {absoluteInputPath}");
-                var directories = Directory.GetDirectories(absoluteInputPath);
-                foreach (var directory in directories)
-                {
-                    Debug.Log($"サブディレクトリ: {directory}");
-                    var files = Directory.GetFiles(absoluteInputPath, "*.png");
-                    foreach (var file in files)
-                    {
-                        Debug.Log($"ファイル: {file}");
-                    }
-                }
-                
-                var pngFiles = Directory.GetFiles(absoluteInputPath, "*.png", SearchOption.AllDirectories);
-                Debug.Log($"対象ファイル1: {pngFiles.Length}");
-                Debug.Log($"対象ファイル2: {Directory.GetFiles(absoluteInputPath, "*.png").Length}");
+                var pngFiles = Directory.GetFiles(inputPath, "*.png", SearchOption.AllDirectories);
                 foreach (var filePath in pngFiles)
                 {
                     var relativePath = filePath.Replace(Application.dataPath, "").Replace("\\", "/");
