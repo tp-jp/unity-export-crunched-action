@@ -50,12 +50,13 @@ runs:
         cd ${{ github.workspace }}/${{ inputs.input-path }}
         find . -name "*.png" -type f | while read file; do
           dir=$(dirname "$file")
-          mkdir -p "${{ steps.vars.outputs.PROJECT_PATH }}/Assets/Input/$dir"
-          cp "$file" "${{ steps.vars.outputs.PROJECT_PATH }}/Assets/Input/$file"
+          mkdir -p "${{ github.workspace }}/${{ steps.vars.outputs.PROJECT_PATH }}/Assets/Input/$dir"
+          cp "$file" ${{ github.workspace }}/"${{ steps.vars.outputs.PROJECT_PATH }}/Assets/Input/$file"
         done
         # コピー後のファイルの所有者とパーミッションを設定
-        chmod -R 755 "${{ steps.vars.outputs.PROJECT_PATH }}/Assets/Input"
-        ls -la "${{ steps.vars.outputs.PROJECT_PATH }}/Assets/Input"
+        # chmod -R 755 "${{ steps.vars.outputs.PROJECT_PATH }}/Assets/Input"
+        ls -la "${{ github.workspace }}/${{ steps.vars.outputs.PROJECT_PATH }}/Assets/Input"
+        ls -la "${{ github.workspace }}/${{ steps.vars.outputs.PROJECT_PATH }}/Assets/Input/sample"
 
     - name: Cache Unity Library
       uses: actions/cache@v4
