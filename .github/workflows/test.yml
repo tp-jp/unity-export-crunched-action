@@ -32,22 +32,21 @@ jobs:
           max-size: 2048
           compression-quality: 50
 
-#      - name: Check Output Files
-#        run: |
-#          # Check if output directory exists and contains subdirectories
-#          if [ ! -d "${{ env.OUTPUT_PATH }}" ]; then
-#            echo "Error: Output directory does not exist."
-#            exit 1
-#          fi
-#
-#          # Count subdirectories
-#          subdir_count=$(find ${{ env.OUTPUT_PATH }} -mindepth 1 -type d | wc -l)
-#          if [ "$subdir_count" -eq 0 ]; then
-#            echo "Error: No subdirectories found in the output directory."
-#            exit 1
-#          fi
-#
-#          echo "Output directory is valid. Contains $subdir_count subdirectories."
+      - name: Check Output Files
+        run: |
+          # Check if output directory exists and contains subdirectories
+          if [ ! -d "${{ env.OUTPUT_PATH }}" ]; then
+            echo "Error: Output directory does not exist."
+            exit 1
+          fi
+
+          # Count subdirectories
+          subdir_count=$(find ${{ env.OUTPUT_PATH }} -mindepth 1 -type d | wc -l)
+          if [ "$subdir_count" -eq 0 ]; then
+            echo "Error: No subdirectories found in the output directory."
+            exit 1
+          fi
+          echo "Output directory is valid. Contains $subdir_count subdirectories."
 
       - name: Upload exported bytes
         uses: actions/upload-artifact@v4
