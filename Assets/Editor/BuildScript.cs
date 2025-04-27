@@ -28,6 +28,8 @@ namespace Editor
                     throw new Exception($"出力フォルダが存在しません: {outputPath}");
                 }
 
+                AssetDatabase.Refresh();
+
                 Debug.Log($"カレントパス： {Environment.CurrentDirectory}");
                 var absoluteInputPath = Path.GetFullPath(inputPath);
                 Debug.Log($"入力パス： {absoluteInputPath}");
