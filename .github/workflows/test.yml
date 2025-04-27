@@ -39,20 +39,23 @@ jobs:
             exit 1
           fi
 
-          files=$(ls ${{ env.OUTPUT_PATH }}/sample/)
-          if [ -z "$files" ]; then
-            echo "Error: No files found in the output directory."
+          # サブディレクトリを含めたファイル数を確認
+          file_count=$(find ${{ env.OUTPUT_PATH }} -type f | wc -l)
+          if [ "$file_count" -eq 0 ]; then
+            echo "Error: No files found in the output directory or its subdirectories."
             exit 1
           fi
 
-          for file in ${{ env.OUTPUT_PATH }}/sample/*; do
+          # すべてのファイルをチェック（サブディレクトリを含む）
+          find ${{ env.OUTPUT_PATH }} -type f -print0 | while IFS= read -r -d '' file; do
             if [ ! -s "$file" ]; then
               echo "Error: File $file is empty."
               exit 1
             fi
+            echo "Checked: $file"
           done
 
-          echo "All output files are valid."
+          echo "All output files are valid. Total files: $file_count"
 
       - name: Upload exported bytes
         uses: actions/upload-artifact@v4
