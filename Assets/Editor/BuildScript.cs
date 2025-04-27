@@ -28,6 +28,7 @@ namespace Editor
                     throw new Exception($"出力フォルダが存在しません: {outputPath}");
                 }
 
+                Debug.Log($"カレントパス： {Environment.CurrentDirectory}");
                 Debug.Log($"入力パス： {inputPath}");
                 var pngFiles = Directory.GetFiles(inputPath, "*.png", SearchOption.AllDirectories);
                 Debug.Log($"対象ファイル: {pngFiles.Length}");
