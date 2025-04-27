@@ -63,6 +63,7 @@ namespace Editor
                     var relativeToInput = Path.GetRelativePath(inputPath, filePath);
                     var outputFileName = Path.ChangeExtension(relativeToInput, ".crn");
                     var outputFilePath = Path.Combine(outputPath, outputFileName);
+                    Debug.Log($"出力ファイルパス: {outputFilePath}");
 
                     // 出力ディレクトリが存在しない場合は作成
                     var outputDirectory = Path.GetDirectoryName(outputFilePath);
