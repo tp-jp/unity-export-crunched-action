@@ -41,6 +41,7 @@ runs:
     - name: Checkout repo
       uses: actions/checkout@v4
       with:
+        repository: "tp-jp/unity-export-crunched-action"
         path: ${{ steps.vars.outputs.PROJECT_PATH }}
 
     - name: Copy PNG files to Assets/Input
