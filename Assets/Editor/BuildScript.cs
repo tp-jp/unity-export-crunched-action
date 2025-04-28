@@ -25,7 +25,7 @@ namespace Editor
 
                 if (!Directory.Exists(outputPath))
                 {
-                    throw new Exception($"出力フォルダが存在しません: {outputPath}");
+                    Directory.CreateDirectory(outputPath);
                 }
 
                 var absoluteInputPath = Path.GetFullPath(inputPath);
