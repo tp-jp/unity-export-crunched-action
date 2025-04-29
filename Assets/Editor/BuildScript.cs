@@ -7,6 +7,8 @@ namespace Editor
 {
     public static class BuildScript
     {
+        const string FileExtension = ".crn";
+
         [MenuItem("Tools/Export Crunched Textures")]
         public static void Build()
         {
@@ -62,8 +64,14 @@ namespace Editor
 
                     var rawData = tex.GetRawTextureData();
                     var relativeToInput = Path.GetRelativePath(absoluteInputPath, filePath);
-                    var outputFileName = Path.ChangeExtension(relativeToInput, ".crn");
-                    var outputFilePath = Path.Combine(outputPath, outputFileName);
+                    
+                    // 解像度を付与したファイル名に変更
+                    var fileNameWithoutExt = Path.GetFileNameWithoutExtension(relativeToInput);
+                    var fileNameWithSize = $"{fileNameWithoutExt}_{tex.width}x{tex.height}{FileExtension}";
+                    var relativeDir = Path.GetDirectoryName(relativeToInput);
+                    var outputFilePath = Path.Combine(outputPath, relativeDir ?? string.Empty, fileNameWithSize);
+                    // var outputFileName = Path.ChangeExtension(relativeToInput, ".crn");
+                    // var outputFilePath = Path.Combine(outputPath, outputFileName);
                     Debug.Log($"出力ファイルパス: {outputFilePath}");
 
                     // 出力ディレクトリが存在しない場合は作成
