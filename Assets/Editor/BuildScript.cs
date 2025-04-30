@@ -43,7 +43,7 @@ namespace Editor
 
                     importer.textureCompression = TextureImporterCompression.Compressed;
                     importer.crunchedCompression = true;
-                    importer.compressionQuality = 50;
+                    importer.compressionQuality = compressionQuality;
                     importer.textureType = TextureImporterType.Default;
                     importer.SetPlatformTextureSettings(new TextureImporterPlatformSettings
                     {
