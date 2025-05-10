@@ -22,7 +22,7 @@ jobs:
           curl -o ${{ env.INPUT_PATH }}/sample/001.png https://raw.githubusercontent.com/tp-jp/unity-export-crunched-action/refs/heads/main/Tests/Input/001.png
 
       - name: Export Crunched Textures
-        uses: tp-jp/unity-export-crunched-action@main
+        uses: tp-jp/unity-export-crunched-action@v1
         with:
           input-path: ${{ env.INPUT_PATH }}
           output-path: ${{ env.OUTPUT_PATH }}
