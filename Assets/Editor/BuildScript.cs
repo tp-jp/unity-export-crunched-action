@@ -70,8 +70,6 @@ namespace Editor
                     var fileNameWithSize = $"{fileNameWithoutExt}_{tex.width}x{tex.height}{FileExtension}";
                     var relativeDir = Path.GetDirectoryName(relativeToInput);
                     var outputFilePath = Path.Combine(outputPath, relativeDir ?? string.Empty, fileNameWithSize);
-                    // var outputFileName = Path.ChangeExtension(relativeToInput, ".crn");
-                    // var outputFilePath = Path.Combine(outputPath, outputFileName);
                     Debug.Log($"出力ファイルパス: {outputFilePath}");
 
                     // 出力ディレクトリが存在しない場合は作成
@@ -90,7 +88,6 @@ namespace Editor
             }
             catch (ArgumentException ex)
             {
-                // Debug.LogError(ex.Message);
                 Console.Error.WriteLine(ex.Message);
                 Environment.Exit(-1);
             }
