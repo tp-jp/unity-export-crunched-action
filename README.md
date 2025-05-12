@@ -25,7 +25,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Run Unity Export Crunched Action
-        uses: tp-jp/unity-export-crunched-action@main
+        uses: tp-jp/unity-export-crunched-action@v1
         with:
           input-path: 'path/to/input'
           output-path: 'path/to/output'
