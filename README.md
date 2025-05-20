@@ -35,6 +35,7 @@ jobs:
           unity-version: '2022.3.22f1'
           max-size: '2048'
           compression-quality: '50'
+          mipmap-enabled: false
 ```
 
 ## 入力パラメータ
@@ -49,6 +50,7 @@ jobs:
 | `unity-version`        | 任意  | `2022.3.22f1`     | 使用するUnityのバージョン                                           |
 | `max-size`             | 任意  | `2048`            | テクスチャの最大サイズ（ピクセル単位）                              |
 | `compression-quality`  | 任意  | `50`              | 圧縮品質（0-100）                                                   |
+| `mipmap-enabled`       | 任意  | `false`           | MipMapの有効状態                                                   |
 
 ## 注意事項
 - Unityの認証情報（メールアドレス、パスワード、ライセンスキー）はGitHub Secretsに保存してください。
