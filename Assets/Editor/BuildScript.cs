@@ -19,6 +19,8 @@ namespace Editor
                 var outputPath = cmdArgs.GetRequired<string>("outputPath");
                 var maxSize = cmdArgs.Get("maxSize", 2048);
                 var compressionQuality = cmdArgs.Get("compressionQuality", 50);
+                var mipmapEnabled = cmdArgs.Get("mipmapEnabled", false);
+
 
                 if (!Directory.Exists(inputPath))
                 {
@@ -44,6 +46,7 @@ namespace Editor
                     importer.textureCompression = TextureImporterCompression.Compressed;
                     importer.crunchedCompression = true;
                     importer.compressionQuality = compressionQuality;
+                    importer.mipmapEnabled = mipmapEnabled;
                     importer.textureType = TextureImporterType.Default;
                     importer.SetPlatformTextureSettings(new TextureImporterPlatformSettings
                     {

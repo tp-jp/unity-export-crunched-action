@@ -29,6 +29,10 @@ inputs:
     description: 'Compression quality (0-100)'
     required: false
     default: '50'
+  mipmap-enabled:
+    description: 'Mipmap Enabled'
+    required: false
+    default: false
 
 runs:
   using: 'composite'
@@ -74,5 +78,5 @@ runs:
         projectPath: ${{ steps.vars.outputs.PROJECT_PATH }}
         unityVersion: ${{ inputs.unity-version }}
         buildMethod: Editor.BuildScript.Build
-        customParameters: -inputPath Assets/Input -outputPath /github/workspace/${{ inputs.output-path }} -maxSize ${{ inputs.max-size }} -compressionQuality ${{ inputs.compression-quality }}
+        customParameters: -inputPath Assets/Input -outputPath /github/workspace/${{ inputs.output-path }} -maxSize ${{ inputs.max-size }} -compressionQuality ${{ inputs.compression-quality }} -mipmapEnabled ${{ inputs.mipmap-enabled }}
         allowDirtyBuild: true
