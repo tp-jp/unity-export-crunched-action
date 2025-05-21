@@ -29,7 +29,9 @@ jobs:
           unity-email: ${{ secrets.UNITY_EMAIL }}
           unity-password: ${{ secrets.UNITY_PASSWORD }}
           unity-license: ${{ secrets.UNITY_LICENSE }}
+          mipmap-enabled: false
           max-size: 2048
+          resize-algorithm: 'Mitchell'
           compression-quality: 50
 
       - name: Check Output Files

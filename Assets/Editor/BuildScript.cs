@@ -17,9 +17,10 @@ namespace Editor
                 var cmdArgs = new CommandLineArgs(Environment.GetCommandLineArgs());
                 var inputPath = cmdArgs.GetRequired<string>("inputPath");
                 var outputPath = cmdArgs.GetRequired<string>("outputPath");
-                var maxSize = cmdArgs.Get("maxSize", 2048);
-                var compressionQuality = cmdArgs.Get("compressionQuality", 50);
                 var mipmapEnabled = cmdArgs.Get("mipmapEnabled", false);
+                var maxSize = cmdArgs.Get("maxSize", 2048);
+                var resizeAlgorithm = cmdArgs.Get("resizeAlgorithm", TextureResizeAlgorithm.Mitchell);
+                var compressionQuality = cmdArgs.Get("compressionQuality", 50);
 
 
                 if (!Directory.Exists(inputPath))
@@ -53,6 +54,7 @@ namespace Editor
                         name = "Standalone",
                         overridden = true,
                         maxTextureSize = maxSize,
+                        resizeAlgorithm = resizeAlgorithm,
                         format = TextureImporterFormat.DXT1Crunched,
                         compressionQuality = compressionQuality,
                     });

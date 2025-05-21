@@ -33,9 +33,10 @@ jobs:
           unity-password: ${{ secrets.UNITY_PASSWORD }}
           unity-license: ${{ secrets.UNITY_LICENSE }}
           unity-version: '2022.3.22f1'
-          max-size: '2048'
-          compression-quality: '50'
           mipmap-enabled: false
+          max-size: '2048'
+          resize-algorithm: 'Mitchell'
+          compression-quality: '50'
 ```
 
 ## 入力パラメータ
@@ -48,9 +49,10 @@ jobs:
 | `unity-password`       | 必須  | なし              | Unity認証用のパスワード                                             |
 | `unity-license`        | 必須  | なし              | Unityライセンスキー                                                 |
 | `unity-version`        | 任意  | `2022.3.22f1`     | 使用するUnityのバージョン                                           |
-| `max-size`             | 任意  | `2048`            | テクスチャの最大サイズ（ピクセル単位）                              |
+| `mipmap-enabled`       | 任意  | `false`           | MipMapの有効/無効（`true` または `false`）                          |
+| `max-size`             | 任意  | `2048`            | テクスチャの最大サイズ（ピクセル単位、2のべき乗: 32〜8192）               |
+| `resize-algorithm`     | 任意  | `Mitchell`        | テクスチャのリサイズアルゴリズム（`Mitchell`、`Bilinear`）             |
 | `compression-quality`  | 任意  | `50`              | 圧縮品質（0-100）                                                   |
-| `mipmap-enabled`       | 任意  | `false`           | MipMapの有効状態                                                   |
 
 ## 注意事項
 - Unityの認証情報（メールアドレス、パスワード、ライセンスキー）はGitHub Secretsに保存してください。

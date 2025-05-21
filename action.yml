@@ -21,18 +21,22 @@ inputs:
   unity-version:
     description: 'Unity version'
     default: '2022.3.22f1'
-  max-size:
-    description: 'Maximum size of texture (pixels)'
-    required: false
-    default: '2048'
-  compression-quality:
-    description: 'Compression quality (0-100)'
-    required: false
-    default: '50'
   mipmap-enabled:
     description: 'Mipmap Enabled'
     required: false
     default: false
+  max-size:
+    description: 'Maximum size of texture (pixels)'
+    required: false
+    default: '2048'
+  resize-algorithm:
+    description: 'Texture resize algorithm'
+    required: false
+    default: 'Mitchell'
+  compression-quality:
+    description: 'Compression quality (0-100)'
+    required: false
+    default: '50'
 
 runs:
   using: 'composite'
